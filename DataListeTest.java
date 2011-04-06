@@ -16,8 +16,15 @@ public class DataListeTest extends JFrame implements ActionListener{
 		private JTextField maxtempfelt;
 		private JTextField nedbørfelt;
 		
+		private int dag;
+		private int måned;
+		private int år;
+		private double min;
+		private double max;
+		private double ned;
 		
-		private DataListe dataliste;
+		
+		private DataListe2 dataliste;
 		private Data nydata;
 
 		public DataListeTest()
@@ -61,13 +68,54 @@ public class DataListeTest extends JFrame implements ActionListener{
 			setSize(500, 500);
 			setVisible(true);
 			
-			dataliste = new DataListe();
+			dataliste = new DataListe2();
 		}
 		
-		public static void main( String[] args )
+		public void melding(String m)
 		{
-			DataListeTest vindu = new DataListeTest();
-		    vindu.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
+			JOptionPane.showMessageDialog(null, m);
+		}
+		
+		public boolean getDatoVerdier()
+		{
+			dag = Integer.parseInt(dagfelt.getText());
+			måned = Integer.parseInt(månedfelt.getText());
+			år = Integer.parseInt(årfelt.getText());
+			if(dag <= 0 || dag > 31)
+			{	melding("ugyldig dag");
+				return false; 
+			}
+			if(måned == 0 || måned >12 || måned < 0)
+			{	melding("ugyldig måned");
+				return false;
+			}
+			if(år < 1970 || år > 3000)
+			{	melding("ugyldig årstall");
+				return false;
+			}
+			return true;
+		}
+		
+		public boolean getVærVerdier()
+		{
+			try{
+			min = Integer.parseInt(mintempfelt.getText());
+			}catch(Exception e){melding("ugyldig mintempverdi");return false;}
+			try{
+			max = Integer.parseInt(maxtempfelt.getText());
+			}catch(Exception e){melding("ugyldig maxtempverdi");return false;}
+			try{
+			ned = Integer.parseInt(nedbørfelt.getText());
+			}catch(Exception e){melding("ugyldig nedbørsverdi");return false;}
+			
+			if(min <0 )
+			{melding("ugyldig nedbørsverdier"); return false;}
+			if(max<min)
+			{melding("maxnedbør er mindre en minnedbør!");return false;}
+			if(max > 9999)
+			{melding("ekstremnedbør");}
+			
+			return true;
 		}
 
 		public void actionPerformed(ActionEvent event) {
@@ -79,24 +127,41 @@ public class DataListeTest extends JFrame implements ActionListener{
 					utskrift.setText(dataliste.skrivUtListe() );
 			}
 			if(event.getSource() == leggtilny)
-			{	try{
-				int dag = Integer.parseInt(dagfelt.getText());
-				int måned = Integer.parseInt(månedfelt.getText());
-				int år = Integer.parseInt(årfelt.getText());
-				Calendar dato = Calendar.getInstance(); 
-				dato.setTimeInMillis(0); //hadde vært lettere med Date(år, måned, dato)
-				dato.set(år,måned,dag,0,0,0);
-				
-				double min = Integer.parseInt(mintempfelt.getText());
-				double max = Integer.parseInt(maxtempfelt.getText());
-				double ned = Integer.parseInt(nedbørfelt.getText());
-				
-				nydata = new Data(dato, min, max, ned);
-				boolean ok = dataliste.nyData(nydata);
-				if(!ok)
-				{JOptionPane.showMessageDialog(null, "Feil ved innsetting av data!");}
-				else JOptionPane.showMessageDialog(null, "Data er lagt til");
-				}catch(Exception ex){JOptionPane.showMessageDialog(null, "Feil ved innsetting av data!");};
+			{	
+				try{
+					//henter dato input
+					if(!getDatoVerdier())
+						return;
+					//lagrer dato som calendar objekt
+					Calendar dato = Calendar.getInstance(); 
+					dato.setTimeInMillis(0); //hadde vært lettere med Date(år, måned, dato)
+					dato.set(år,måned,dag);
+					
+					if(!getVærVerdier())
+						return;
+					
+
+					
+					//lager en ny node med dataen
+					nydata = new Data(dato, min, max, ned);
+					
+					//prøver å sette den inn i lista.
+					boolean dobbeltregistrering = dataliste.datoEksisterer(nydata);
+						
+					if(dobbeltregistrering)
+					{melding("Det er allerede registrert data på denne datoen");}
+					else{
+						dataliste.nyData(nydata);
+						melding("Data er lagt til");
+					}
+				}
+				catch(Exception ex){melding("Feil ved innsetting av data!");};
 			}
+		}
+
+		public static void main( String[] args )
+		{
+			DataListeTest vindu = new DataListeTest();
+		    vindu.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
 		}
 	}
