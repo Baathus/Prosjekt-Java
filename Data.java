@@ -4,6 +4,10 @@ import java.util.Calendar;
 
 
 public class Data implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Calendar dato;
 	private double mintemp;
 	private double maxtemp;
