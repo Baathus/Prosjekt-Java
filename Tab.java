@@ -6,21 +6,16 @@ import java.awt.*;
 public class Tab extends JFrame implements ActionListener
 {
 	JTextArea utskrift1,utskrift2,utskrift3,utskrift4;
+	JButton RegNySted;
+	JTextField innFylke,innSted;
+	JButton regData2;
 
-	//P1 (registrer ny sted)//////////////////////////////////////////////////
-		JButton RegNySted;
-		JTextField innFylke,innSted;
-	//P2 (registrer ny data)///////////////////////////////////////////////////
-		JButton regData2;
 	public Tab()
 	{
-
 		utskrift1 = new JTextArea(20,50);
 		utskrift2 = new JTextArea(20,45);
 		utskrift3 = new JTextArea(20,50);
-		utskrift4 = new JTextArea(20,50);
-
-
+		utskrift4 = new JTextArea(20,45);
 
 		RegNySted = new JButton("Registrer nytt sted");
 		RegNySted.addActionListener(this);
@@ -39,6 +34,7 @@ public class Tab extends JFrame implements ActionListener
 		regData2 = new JButton( "Registrer ny data");
 		regData2.addActionListener(this);
 
+
 		JFrame frame = new JFrame("Hovedvindu");   // super("")
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -46,7 +42,13 @@ public class Tab extends JFrame implements ActionListener
 		JPanel p2 = new JPanel();
 		JPanel p3 = new JPanel();
 		JPanel p4 = new JPanel();
-
+		JPanel p5 = new JPanel();
+		JPanel p6 = new JPanel();
+		JPanel p7 = new JPanel();
+		JPanel p8 = new JPanel();
+		
+		JTabbedPane sub = new JTabbedPane();
+		p3.add(sub);
 
 
 		//p1
@@ -56,6 +58,9 @@ public class Tab extends JFrame implements ActionListener
 		p1.add(innSted);
 		p1.add(RegNySted);
 		p1.add(utskrift1);
+		
+		
+		
 
 		//p2
 		p2.add(new JLabel("Skriv fylke :"));
@@ -72,10 +77,8 @@ public class Tab extends JFrame implements ActionListener
 		p2.add(nedbør2);
 		p2.add(regData2);
 		p2.add(utskrift2);
-
-
-		//p3
-		p3.add(new JLabel("hei du er på 3"));
+		
+		p8.add(utskrift4);
 		//p4
 		p4.add(new JLabel("hei du er på 4"));
 		//p4
@@ -84,9 +87,22 @@ public class Tab extends JFrame implements ActionListener
 		tpane.addTab("Registrer et nytt sted", null, p1, "hei");
 		tpane.addTab("Registrer ny data",null,p2, "hei");
 		tpane.addTab("Vis data",null, p3, "hei");
-		tpane.addTab("Statistikk",null, p4 , "hei");
-
-
+		tpane.addTab("Statistikk",p4);
+		
+	
+		sub.addTab("Statistikk for år", p5);
+		sub.addTab("Statistikk for måned", p6);
+		sub.addTab("Statistikk for dag", p7);
+		sub.addTab("Ekstreme verdier", p8);
+		
+		
+		setLayout(new FlowLayout());
+		
+		
+		frame.setPreferredSize( new java.awt.Dimension(600,400) );
+		
+		
+		
 		frame.add(tpane);
 		frame.setSize(600,500);
 		frame.setVisible(true);
@@ -101,7 +117,7 @@ public class Tab extends JFrame implements ActionListener
 	} //slutt på Konstruktør
 	public void p1()
 	{
-				utskrift1.setText("Nytt sted registrert");
+		utskrift1.setText("Nytt sted registrert");
 	}
 	public void p2()
 	{
