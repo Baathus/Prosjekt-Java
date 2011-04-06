@@ -1,8 +1,9 @@
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 
-public class Data {
+public class Data implements Serializable{
 	private Calendar dato;
 	private double mintemp;
 	private double maxtemp;
