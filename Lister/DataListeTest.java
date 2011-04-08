@@ -30,7 +30,7 @@ public class DataListeTest extends JFrame implements ActionListener{
 		private double ned;
 		
 		
-		private DataListe2 dataliste;
+		private DataListe dataliste;
 		private Data nydata;
 
 		public DataListeTest()
