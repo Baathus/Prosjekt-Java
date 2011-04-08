@@ -1,4 +1,6 @@
-	import java.awt.*;
+package Lister;
+
+import java.awt.*;
 	import java.util.*;
 	import java.awt.event.*;
 	import javax.swing.*;
@@ -50,7 +52,7 @@ public class DataListeTest extends JFrame implements ActionListener{
 			maxtempfelt = new JTextField(2);
 			c.add(maxtempfelt);
 			c.add(new JLabel("Nedbør"));
-			nedbørfelt= new JTextField(4);
+			nedbørfelt= new JTextField(3);
 			c.add(nedbørfelt);
 			
 			
@@ -85,12 +87,16 @@ public class DataListeTest extends JFrame implements ActionListener{
 			{	melding("ugyldig dag");
 				return false; 
 			}
-			if(måned == 0 || måned >12 || måned < 0)
+			if(måned == 0 || måned >12 || måned < 1)
 			{	melding("ugyldig måned");
 				return false;
 			}
-			if(år < 1970 || år > 3000)
+			if(år < 1970)
 			{	melding("ugyldig årstall");
+				return false;
+			}
+			if(år > 3000)
+			{	melding("Morsom eller.\nÅr "+år+" :P");
 				return false;
 			}
 			return true;
@@ -135,12 +141,10 @@ public class DataListeTest extends JFrame implements ActionListener{
 					//lagrer dato som calendar objekt
 					Calendar dato = Calendar.getInstance(); 
 					dato.setTimeInMillis(0); //hadde vært lettere med Date(år, måned, dato)
-					dato.set(år,måned,dag);
+					dato.set(år,måned-1,dag);
 					
 					if(!getVærVerdier())
 						return;
-					
-
 					
 					//lager en ny node med dataen
 					nydata = new Data(dato, min, max, ned);

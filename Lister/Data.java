@@ -1,3 +1,5 @@
+package Lister;
+
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -43,7 +45,7 @@ public class Data implements Serializable{
 	
 	public String toString()
 	{
-		SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyy");
+		SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
 		return sdf.format(dato.getTime())+"\t"+mintemp+"\t"+maxtemp+"\t"+nedbør;
 	}
 }

@@ -1,39 +1,42 @@
+package Lister;
+
 public class DataListe2 {
 	
 	Data første;
 	
 	public boolean nyData(Data n)
-	{
-		if(tomListe())
+	{	
+		if(første == null)//hvis første er null, blir n ny første
 		{
-			første = n; 
+			første = n;
 			return true;
 		}
-		
-		Data a = første;
-		Data b = null;
-		
-		if(n.getDato().compareTo(a.getDato()) < 0)
+		if(første.getDato().compareTo(n.getDato()) > 0)
+		//hvis første.dato er etter n.dato 
+		//blir n satt forrest i lista
 		{
+			settInnForrest(n);
+			return true;
+		}
+		else//setter ny data, sortert inn i lista etter dato.
+		{
+			Data a = første;
+			while(a.neste != null && a.neste.getDato().compareTo(n.getDato()) < 0)
+			{
+				a = a.neste;
+			}
+			n.neste = a.neste;
 			a.neste = n;
 			return true;
-			
 		}
+	}
+	
+	private void settInnForrest(Data n)
+	{
+		Data a = første;
 		
-		while(a.neste != null)
-		{
-			if(n.getDato().compareTo(a.neste.getDato()) < 0)
-			{
-				b = a.neste;
-				a.neste=n;
-				n.neste = b;
-				b = null;
-				return true;
-			}
-			a = a.neste;
-		}
-		a.neste = n;
-		return true;
+		n.neste = a;
+		første = n;
 	}
 	
 	public boolean datoEksisterer(Data n)
@@ -59,6 +62,11 @@ public class DataListe2 {
 	{
 		Data a = første;
 		String retur = "Dato\tMinTemp\tMaxTemp\tNedbør\n";
+		
+		if(a != null)
+		{
+			retur += a.toString() +"\n";
+		}
 		
 		while(a.neste != null)
 		{
