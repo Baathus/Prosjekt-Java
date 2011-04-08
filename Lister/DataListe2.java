@@ -18,24 +18,28 @@ public class DataListe2 {
 			settInnForrest(n);
 			return true;
 		}
-		else//setter ny data, sortert inn i lista etter dato.
+		
+		Data a = første;
+		Data b = null;
+		while(a.neste != null)
 		{
-			Data a = første;
-			while(a.neste != null && a.neste.getDato().compareTo(n.getDato()) < 0)
+			b = a;
+			if(a.neste.getDato().compareTo(n.getDato()) < 0)
 			{
-				a = a.neste;
+				b.neste = n;
+				n.neste = a.neste;
+				return true;
 			}
-			n.neste = a.neste;
-			a.neste = n;
-			return true;
+			a = a.neste;
 		}
+		
+		a.neste = n;
+		return true;
 	}
 	
 	private void settInnForrest(Data n)
 	{
-		Data a = første;
-		
-		n.neste = a;
+		n.neste = første;
 		første = n;
 	}
 	
@@ -60,17 +64,17 @@ public class DataListe2 {
 	
 	public String skrivUtListe()
 	{
-		Data a = første;
 		String retur = "Dato\tMinTemp\tMaxTemp\tNedbør\n";
 		
-		if(a != null)
+		if(første != null)
 		{
-			retur += a.toString() +"\n";
+			retur += første.toString() +"\n";
 		}
 		
+		Data a = første;
 		while(a.neste != null)
 		{
-			retur += a.toString()+"\n";
+			retur += a.neste.toString()+"\n";
 			a = a.neste;
 		}
 		return retur;
