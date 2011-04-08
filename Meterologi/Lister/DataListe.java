@@ -2,11 +2,11 @@
  * Skrevet av Mikael Jakhelln den 8 april 2011
  */
 
-package Lister;
+package Meterologi.Lister;
 
 public class DataListe {
 	
-	Data første;
+	private Data første;
 	
 	public boolean nyData(Data n)
 	{	
@@ -36,7 +36,7 @@ public class DataListe {
 		}
 		a.neste = n; return true;
 	}
-	public void settInnEtter(Data a, Data ny)
+	private void settInnEtter(Data a, Data ny)
 	{
 		ny.neste = a.neste;
 		a.neste = ny;

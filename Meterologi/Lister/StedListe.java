@@ -1,4 +1,8 @@
-package Lister;
+/*
+ * Skrevet av Thomas Nordengen den 4 april 2011
+ */
+
+package Meterologi.Lister;
 
 import javax.swing.*;
 import java.util.*;
@@ -10,7 +14,10 @@ public class StedListe
 	String rekkefølge = 
 		"Akershus, Aust-Agder, Buskerud Finnmark, Hedmark, Hordaland, Møre og Romsdal, " +
 		"Nordland, Nord-Trøndelag, Oppland, Oslo, Rogaland, Sogn og Fjordane, " +
-		"Sør-Trøndelag, Telemark, Troms, Vest-Agder, Vestfold, Østfold";	
+		"Sør-Trøndelag, Telemark, Troms, Vest-Agder, Vestfold, Østfold";
+	
+	
+	
 	try{
 		Comparator comp = new RuleBasedComparator (rekkefølge);
 	}

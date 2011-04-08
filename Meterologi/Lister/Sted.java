@@ -1,9 +1,17 @@
-import java.io.Serializable;
-import java.util.Collection;
+/*
+ * Skrevet av Mikael Jakhelln 8.april 2011
+ */
 
+package Meterologi.Lister;
+
+import java.io.Serializable;
 
 public class Sted implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public DataListe dataliste;
 	private String sted;
 	private String fylke;
@@ -28,9 +36,9 @@ public class Sted implements Serializable{
 		parameterens dato, skal den returnere false. 
 		Ved vellykket innsetting skal den returnere true
 		*/
-		if(!finnesILista(n) )
+		if( !finnesILista(n) )
 			{
-				dataliste.nyData(n);//fiktivt metodekall	
+				dataliste.nyData(n);	
 				return true;
 			}
 		else return false;
@@ -39,8 +47,8 @@ public class Sted implements Serializable{
 	public boolean finnesILista(Data n)
 	//sjekker igjennom datalista om dato er registrert ifra før
 	{
-		//if(dataliste.nyNode.getDato() )
-		
+		if(dataliste.datoEksisterer(n))
+			return true;
 		return false;
 	}
 	

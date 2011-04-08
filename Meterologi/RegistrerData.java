@@ -1,11 +1,17 @@
 /*
  * Skrevet av Mikael Jakhelln, 8.4.2011
+ * Denne klassen skal være gui for registrering av nyData og legges til i Tab.java
  */
+
+package Meterologi;
 
 import java.awt.*;
 		import java.util.*;
 		import java.awt.event.*;
-		import javax.swing.*;
+import javax.swing.*;
+
+import Meterologi.Lister.Data;
+import Meterologi.Lister.DataListe;
 
 public class RegistrerData extends JPanel implements ActionListener{
 
@@ -31,9 +37,9 @@ public class RegistrerData extends JPanel implements ActionListener{
 			private DataListe dataliste;
 			private Data nydata;
 
-			public DataListeTest()
+			public RegistrerData()
 			{
-				super("Datalistetest");
+				super();
 				Container c = getContentPane();
 				c.setLayout(new FlowLayout());
 				

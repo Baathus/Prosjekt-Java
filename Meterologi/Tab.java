@@ -1,5 +1,6 @@
-import javax.swing.*;
+package Meterologi;
 
+import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;
 
@@ -99,12 +100,13 @@ public class Tab extends JFrame implements ActionListener
 		setLayout(new FlowLayout());
 		
 		
-		frame.setPreferredSize( new java.awt.Dimension(600,400) );
+		frame.setPreferredSize( new java.awt.Dimension(800,600) );
 		
 		
 		
 		frame.add(tpane);
 		frame.setSize(600,500);
+		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 
 		utskrift1.append("By,fylke:\n");

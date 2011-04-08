@@ -1,4 +1,4 @@
-package Lister;
+package Meterologi.Lister;
 
 import java.util.*;
 
