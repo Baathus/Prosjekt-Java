@@ -20,15 +20,24 @@ public class DataListe2 {
 		}
 		
 		Data a = første;
-		Data b = null;
-		while(a.neste != null && n.getDato().after(a.getDato()) )
+		while(a.neste != null && !n.getDato().before(a.getDato()) )
 		{
+			if( a.neste.getDato().after(n.getDato()) )
+			{
+				settInnEtter(a,n);
+				return true;
+			}
 			a = a.neste;
 		}
-		n.neste = a.neste;
-		a.neste = n;
+		if(a.neste == null)
+		{a.neste = n; return true;}
 		
-		return true;
+		return false;
+	}
+	public void settInnEtter(Data a, Data ny)
+	{
+		ny.neste = a.neste;
+		a.neste = ny;
 	}
 	
 	private void settInnForrest(Data n)

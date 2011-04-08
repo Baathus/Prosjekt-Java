@@ -9,14 +9,14 @@ public class DatoTest {
 	public static void main(String[] args)
 	{
 		Calendar en = Calendar.getInstance();
-		en.setTimeInMillis(0);
-		en.set(1999,1,1);
+		en.setTimeInMillis(3600);
+		en.set(2000,7,1);
 		
 		Calendar to = Calendar.getInstance();
-		to.setTimeInMillis(0);
-		to.set(2000,1,1);
+		to.setTimeInMillis(3600);
+		to.set(2000,7,4);
 		
-		String s = "en : 1.1.1999\nto: 1.1.2000\nHvilken er før den andre?\nSvar: ";
+		String s = "en : 1.6.2000\nto: 4.6.2000\nHvilken er før den andre?\nSvar: ";
 					if(en.before(to))
 							s+="en er først";
 					else
