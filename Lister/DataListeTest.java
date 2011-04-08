@@ -1,3 +1,7 @@
+/*
+ * Skrevet av Mikael Jakhelln den 8 april 2011
+ */
+
 package Lister;
 
 import java.awt.*;
@@ -99,6 +103,7 @@ public class DataListeTest extends JFrame implements ActionListener{
 			{	melding("Morsom eller.\nÅr "+år+" :P");
 				return false;
 			}
+			//må lage test på registrering av datoer som ikke har vært ennå.
 			return true;
 		}
 		
@@ -142,6 +147,12 @@ public class DataListeTest extends JFrame implements ActionListener{
 					Calendar dato = Calendar.getInstance(); 
 					dato.setTimeInMillis(0); //hadde vært lettere med Date(år, måned, dato)
 					dato.set(år,måned-1,dag);/*-1 fordi Calendar.set() er teit*/
+					Calendar nå = Calendar.getInstance();
+					if(nå.before(dato))
+					{
+						melding("regisrtert dato har ikke intruffet ennå");
+						return;
+					}
 					
 					if(!getVærVerdier())
 						return;

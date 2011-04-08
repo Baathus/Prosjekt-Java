@@ -1,3 +1,7 @@
+/*
+ * Skrevet av Mikael Jakhelln den 8 april 2011
+ */
+
 package Lister;
 
 import java.io.Serializable;

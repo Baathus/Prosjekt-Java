@@ -1,3 +1,7 @@
+/*
+ * Skrevet av Mikael Jakhelln den 8 april 2011
+ */
+
 package Lister;
 
 public class DataListe2 {
@@ -21,6 +25,7 @@ public class DataListe2 {
 		
 		Data a = første;
 		while(a.neste != null && !n.getDato().before(a.getDato()) )
+			//hvis ny.dato er mellom noen andre i lista settes den inn riktig
 		{
 			if( a.neste.getDato().after(n.getDato()) )
 			{
@@ -29,10 +34,7 @@ public class DataListe2 {
 			}
 			a = a.neste;
 		}
-		if(a.neste == null)
-		{a.neste = n; return true;}
-		
-		return false;
+		a.neste = n; return true;
 	}
 	public void settInnEtter(Data a, Data ny)
 	{
