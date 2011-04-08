@@ -1,6 +1,14 @@
+/*
+ * Skrevet hovedsaklig av Nam le(mest kred!), med småsnutt fra Mikael Jakhelln og eventuelt Thomas Nordengen
+ * Oppdatert: 4.April 2011
+ */
+
 package Meterologi;
 
 import javax.swing.*;
+
+import Meterologi.Lister.StedListe;
+
 import java.awt.event.*;
 import java.awt.*;
 
@@ -9,7 +17,9 @@ public class Tab extends JFrame implements ActionListener
 	JTextArea utskrift1,utskrift2,utskrift3,utskrift4;
 	JButton RegNySted;
 	JTextField innFylke,innSted;
-	JButton regData2;
+	JButton regData;
+	StedListe stedliste; //må initialisere, men venter til stedliste er ferdig
+	RegistrerData registrerdata;
 
 	public Tab()
 	{
@@ -32,15 +42,19 @@ public class Tab extends JFrame implements ActionListener
 		min2 = new JTextField(18);
 		max2 = new JTextField(18);
 		nedbør2 = new JTextField(18);
-		regData2 = new JButton( "Registrer ny data");
-		regData2.addActionListener(this);
+		regData = new JButton( "Registrer ny data");
+		regData.addActionListener(this);
 
 
 		JFrame frame = new JFrame("Hovedvindu");   // super("")
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		JPanel p1 = new JPanel();
+		//JPanel p2 = new Panel();
+		registrerdata = new RegistrerData();
 		JPanel p2 = new JPanel();
+		registrerdata.ByggPanel(p2);
+
 		JPanel p3 = new JPanel();
 		JPanel p4 = new JPanel();
 		JPanel p5 = new JPanel();
@@ -62,7 +76,7 @@ public class Tab extends JFrame implements ActionListener
 		
 		
 		
-
+/* Mikael tester å lage eget panel :/
 		//p2
 		p2.add(new JLabel("Skriv fylke :"));
 		p2.add(fylke2);
@@ -76,9 +90,9 @@ public class Tab extends JFrame implements ActionListener
 		p2.add(dato2);
 		p2.add(new JLabel("nedbør mm :"));
 		p2.add(nedbør2);
-		p2.add(regData2);
+		p2.add(regData);
 		p2.add(utskrift2);
-		
+*/
 		p8.add(utskrift4);
 		//p4
 		p4.add(new JLabel("hei du er på 4"));
@@ -117,27 +131,34 @@ public class Tab extends JFrame implements ActionListener
 
 
 	} //slutt på Konstruktør
+	
+	public void melding(String m)
+	{JOptionPane.showMessageDialog(null,m);}
+	
 	public void p1()
 	{
-		utskrift1.setText("Nytt sted registrert");
+		melding("Nytt sted registrert");
 	}
+	
 	public void p2()
 	{
-		utskrift2.setText("Ny data er registrert i lista");
+		melding("Ny data er registrert i lista");
 	}
+	
 	public void actionPerformed(ActionEvent action) {
 
 			if(action.getSource() == RegNySted)
 				p1();
-			else if(action.getSource() == regData2)
+			registrerdata.knappelytter(action);
+			/*else if(action.getSource() == regData)
+			{
+				
 				p2();
+			}*/
 		}
 
 	public static void main(String[]args)
 	{
 		Tab t = new Tab();
 	}
-
-
 }//slutt på gui-class
-

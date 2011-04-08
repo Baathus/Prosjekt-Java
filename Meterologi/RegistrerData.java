@@ -13,10 +13,13 @@ import javax.swing.*;
 import Meterologi.Lister.Data;
 import Meterologi.Lister.DataListe;
 
-public class RegistrerData extends JPanel implements ActionListener{
+public class RegistrerData implements ActionListener{
 
-		private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
+
 			private JTextArea utskrift;
+			
+			private JComboBox fylkeboks;
 			private JButton skrivut;
 			private JButton leggtilny;
 			private JTextField dagfelt;
@@ -37,48 +40,46 @@ public class RegistrerData extends JPanel implements ActionListener{
 			private DataListe dataliste;
 			private Data nydata;
 
-			public RegistrerData()
+			public JPanel ByggPanel(JPanel panelet)
 			{
-				super();
-				Container c = getContentPane();
-				c.setLayout(new FlowLayout());
+				panelet.setLayout(new FlowLayout());
 				
-				c.add(new JLabel("Dag"));
+				panelet.add(new JLabel("Dag"));
 				dagfelt = new JTextField(2);
-				c.add(dagfelt);
-				c.add(new JLabel("Måned"));
+				panelet.add(dagfelt);
+				panelet.add(new JLabel("Måned"));
 				månedfelt = new JTextField(2);
-				c.add(månedfelt);
-				c.add(new JLabel("År"));
+				panelet.add(månedfelt);
+				panelet.add(new JLabel("År"));
 				årfelt = new JTextField(4);
-				c.add(årfelt);
+				panelet.add(årfelt);
 
-				c.add(new JLabel("Mimimumstemp"));
+				panelet.add(new JLabel("Minimumstemp"));
 				mintempfelt = new JTextField(2);
-				c.add(mintempfelt);
-				c.add(new JLabel("Maksimumstemp"));
+				panelet.add(mintempfelt);
+				panelet.add(new JLabel("Maksimumstemp"));
 				maxtempfelt = new JTextField(2);
-				c.add(maxtempfelt);
-				c.add(new JLabel("Nedbør"));
+				panelet.add(maxtempfelt);
+				panelet.add(new JLabel("Nedbør"));
 				nedbørfelt= new JTextField(3);
-				c.add(nedbørfelt);
+				panelet.add(nedbørfelt);
 				
 				
 				leggtilny = new JButton("Registrer Ny Data");
 				leggtilny.addActionListener(this);
-				c.add(leggtilny);
+				panelet.add(leggtilny);
 				
 				skrivut = new JButton("skriv ut");
 				skrivut.addActionListener(this);
-				c.add(skrivut);
+				panelet.add(skrivut);
 
 				utskrift = new JTextArea(40, 40);
-				c.add(new JScrollPane(utskrift));
-
-				setSize(500, 500);
-				setVisible(true);
+				panelet.add(new JScrollPane(utskrift));
+				panelet.setVisible(true);
 				
-				dataliste = new DataListe2();
+				dataliste = new DataListe();
+				
+				return panelet;
 			}
 			
 			public void melding(String m)
@@ -133,7 +134,7 @@ public class RegistrerData extends JPanel implements ActionListener{
 				return true;
 			}
 
-			public void actionPerformed(ActionEvent event) {
+			public void knappelytter(ActionEvent event) {
 				if(event.getSource() == skrivut)
 				{
 					if( dataliste.tomListe() )
@@ -176,12 +177,6 @@ public class RegistrerData extends JPanel implements ActionListener{
 					}
 					catch(Exception ex){melding("Feil ved innsetting av data!");};
 				}
-			}
-
-			public static void main( String[] args )
-			{
-				DataListeTest vindu = new DataListeTest();
-			    vindu.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
 			}
 		}
 
