@@ -11,7 +11,7 @@ public class DataListe2 {
 			første = n;
 			return true;
 		}
-		if(første.getDato().compareTo(n.getDato()) > 0)
+		if(første.getDato().after(n.getDato()))
 		//hvis første.dato er etter n.dato 
 		//blir n satt forrest i lista
 		{
@@ -21,19 +21,13 @@ public class DataListe2 {
 		
 		Data a = første;
 		Data b = null;
-		while(a.neste != null)
+		while(a.neste != null && n.getDato().after(a.getDato()) )
 		{
-			b = a;
-			if(a.neste.getDato().compareTo(n.getDato()) < 0)
-			{
-				b.neste = n;
-				n.neste = a.neste;
-				return true;
-			}
 			a = a.neste;
 		}
-		
+		n.neste = a.neste;
 		a.neste = n;
+		
 		return true;
 	}
 	
