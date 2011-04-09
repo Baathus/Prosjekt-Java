@@ -24,8 +24,8 @@ public class RegistrerData implements ActionListener{
 	
 	private JComboBox fylkeboks;
 	private JComboBox stedboks;
-	private JTextField dagfelt;
-	private JTextField månedfelt;
+	private JComboBox dagboks;
+	private JComboBox månedboks;
 	private JTextField årfelt;
 	private JTextField mintempfelt;
 	private JTextField maxtempfelt;
@@ -56,6 +56,10 @@ public class RegistrerData implements ActionListener{
 									"Troms","Vest-Agder","Vestfold","Østfold"};
 	private String sted;
 	private final String[] steder = {"Sted 1","Sted 2","Sted 3"};
+	private final String[] dager = {"1","2","3","4","5","6","7","8","9","10",
+									"11","12","13","14","15","16","17","18","19",
+									"20","21","22","23","24","25","26","27","28","29","30","31"};
+	private final String[] måneder= {"1","2","3","4","5","6","7","8","9","10","11","12"};
 	//skal egentlig bruke stedsliste.getRegistrerteSteder() og stedsliste.getRegistrerteFylker()
 	//som skal returnere en String[] med registrerte fylker, og en annen med steder
 
@@ -83,11 +87,11 @@ public class RegistrerData implements ActionListener{
 		årfelt = new JTextField(4);
 		datopanel.add(årfelt);
 		datopanel.add(new JLabel("Måned"));
-		månedfelt = new JTextField(2);
-		datopanel.add(månedfelt);
+		månedboks = new JComboBox(måneder);
+		datopanel.add(månedboks);
 		datopanel.add(new JLabel("Dag"));
-		dagfelt = new JTextField(2);
-		datopanel.add(dagfelt);				
+		dagboks = new JComboBox(dager);
+		datopanel.add(dagboks);				
 		toppanel.add(datopanel);
 		//inputfelter for inndata
 		JPanel inndatapanel = new JPanel();
@@ -139,8 +143,8 @@ public class RegistrerData implements ActionListener{
 	
 	public boolean getDatoVerdier()
 	{
-		dag = Integer.parseInt(dagfelt.getText());
-		måned = Integer.parseInt(månedfelt.getText());
+		dag = Integer.parseInt((String) dagboks.getSelectedItem());
+		måned =Integer.parseInt((String) månedboks.getSelectedItem());
 		år = Integer.parseInt(årfelt.getText());
 		if(dag <= 0 || dag > 31)
 		{	melding("ugyldig dag");
@@ -174,9 +178,9 @@ public class RegistrerData implements ActionListener{
 		ned = Integer.parseInt(nedbørfelt.getText());
 		}catch(Exception e){melding("ugyldig nedbørsverdi");return false;}
 		
-		if(min <0 )
+		if(min < 0 )
 		{melding("ugyldig nedbørsverdier"); return false;}
-		if(max<min)
+		if(max < min)
 		{melding("maxnedbør er mindre en minnedbør!");return false;}
 		if(max > 9999)
 		{melding("ekstremnedbør");}
@@ -203,7 +207,7 @@ public class RegistrerData implements ActionListener{
 				//lagrer dato som calendar objekt
 				Calendar dato = Calendar.getInstance(); 
 				dato.setTimeInMillis(0); //hadde vært lettere med Date(år, måned, dato)
-				dato.set(år,måned-1,dag);/*-1 fordi Calendar.set() er teit*/
+				dato.set(år,måned-1,dag);/*måned-1 fordi Calendar.set() er teit*/
 				Calendar nå = Calendar.getInstance();
 				if(nå.before(dato))
 				{
