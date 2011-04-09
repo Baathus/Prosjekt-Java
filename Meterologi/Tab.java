@@ -1,6 +1,7 @@
 /*
- * Skrevet hovedsaklig av Nam le(mest kred!), med småsnutt fra Mikael Jakhelln og eventuelt Thomas Nordengen
- * Oppdatert: 4.April 2011
+ * Skrevet hovedsaklig av Nam le(mest kred!), 
+ * med småsnutt fra Mikael Jakhelln og eventuelt Thomas Nordengen
+ * Oppdatert: 9.April 2011
  */
 
 package Meterologi;
@@ -35,13 +36,6 @@ public class Tab extends JFrame implements ActionListener
 		innSted = new JTextField(15);
 		///////////////////////////////////////////////////////////////////////////
 
-		JTextField fylke2,sted2,dato2,min2,max2,nedbør2;
-		fylke2 = new JTextField(18);
-		sted2 = new JTextField(18);
-		dato2 = new JTextField(18);
-		min2 = new JTextField(18);
-		max2 = new JTextField(18);
-		nedbør2 = new JTextField(18);
 		regData = new JButton( "Registrer ny data");
 		regData.addActionListener(this);
 
@@ -98,7 +92,7 @@ public class Tab extends JFrame implements ActionListener
 		JTabbedPane tpane = new JTabbedPane();
 
 		tpane.addTab("Registrer et nytt sted", null, p1, "hei");
-		tpane.addTab("Registrer ny data",null,p2, "hei");
+		tpane.addTab("Registrer ny data",null,p2, "Trykk her for registrering av ny data");
 		tpane.addTab("Vis data",null, p3, "hei");
 		tpane.addTab("Statistikk",p4);
 		
@@ -131,7 +125,9 @@ public class Tab extends JFrame implements ActionListener
 	} //slutt på Konstruktør
 	
 	public void melding(String m)
-	{JOptionPane.showMessageDialog(null,m);}
+	{
+		JOptionPane.showMessageDialog(null,m, "OBS!", JOptionPane.INFORMATION_MESSAGE);
+	}
 	
 	public void p1()
 	{
