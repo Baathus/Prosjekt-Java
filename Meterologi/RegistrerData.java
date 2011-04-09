@@ -24,14 +24,14 @@ public class RegistrerData implements ActionListener{
 	
 	private JComboBox fylkeboks;
 	private JComboBox stedboks;
-	private JButton skrivut;
-	private JButton leggtilny;
 	private JTextField dagfelt;
 	private JTextField månedfelt;
 	private JTextField årfelt;
 	private JTextField mintempfelt;
 	private JTextField maxtempfelt;
 	private JTextField nedbørfelt;
+	private JButton skrivut;
+	private JButton leggtilny;
 	
 	private int dag;
 	private int måned;
@@ -61,7 +61,7 @@ public class RegistrerData implements ActionListener{
 
 	public void ByggPanel(JPanel panelet)
 	{	//bygger GUI på parameter panelet
-		panelet.setLayout(new GridLayout(3,0));
+		panelet.setLayout(new FlowLayout());
 		
 		//panel for alt utenom utksiftsfelt
 		JPanel toppanel = new JPanel();
@@ -114,7 +114,7 @@ public class RegistrerData implements ActionListener{
 		panelet.add(toppanel);
 		
 		//utskriftsvindu
-		utskrift = new JTextArea(40, 40);
+		utskrift = new JTextArea(20, 50);
 		panelet.add(new JScrollPane(utskrift));
 		panelet.setVisible(true);
 		
@@ -125,6 +125,16 @@ public class RegistrerData implements ActionListener{
 	public void melding(String m)
 	{
 		JOptionPane.showMessageDialog(null,m, "OBS!", JOptionPane.INFORMATION_MESSAGE);
+	}
+	
+	public boolean getStedVerdier()
+	{
+		try{
+		fylke = (String) fylkeboks.getSelectedItem();
+		sted = (String) stedboks.getSelectedItem();
+		}catch(Exception e)
+		{melding("det oppstod en feil med valg av fylke og sted");return false;}
+		return true;
 	}
 	
 	public boolean getDatoVerdier()
@@ -185,6 +195,8 @@ public class RegistrerData implements ActionListener{
 		if(event.getSource() == leggtilny)
 		{	
 			try{
+				if(!getStedVerdier())//henter valg fra sted og fylkesinput, returnerer false ved feil
+					return;
 				//henter dato input
 				if(!getDatoVerdier())
 					return;
@@ -195,7 +207,7 @@ public class RegistrerData implements ActionListener{
 				Calendar nå = Calendar.getInstance();
 				if(nå.before(dato))
 				{
-					melding("regisrtert dato har ikke intruffet ennå");
+					melding("innskrevet dato har ikke intruffet ennå");
 					return;
 				}
 				
