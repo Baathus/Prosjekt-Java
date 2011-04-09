@@ -178,8 +178,9 @@ public class RegistrerData implements ActionListener{
 		ned = Integer.parseInt(nedbørfelt.getText());
 		}catch(Exception e){melding("ugyldig nedbørsverdi");return false;}
 		
-		if(min < 0 )
+		if(ned < 0 )
 		{melding("ugyldig nedbørsverdier"); return false;}
+		if(min < -237)
 		if(max < min)
 		{melding("maxnedbør er mindre en minnedbør!");return false;}
 		if(max > 9999)

@@ -63,26 +63,9 @@ public class Tab extends JFrame implements ActionListener
 		p1.add(innSted);
 		p1.add(RegNySted);
 		p1.add(utskrift1);
-		
-		
-		
-/* Mikael tester å lage eget panel :/
-		//p2
-		p2.add(new JLabel("Skriv fylke :"));
-		p2.add(fylke2);
-		p2.add(new JLabel("min temp. :"));
-		p2.add(min2);
-		p2.add(new JLabel("Skriv sted :"));
-		p2.add(sted2);
-		p2.add(new JLabel("max temp. :"));
-		p2.add(max2);
-		p2.add(new JLabel("Skriv dato :"));
-		p2.add(dato2);
-		p2.add(new JLabel("nedbør mm :"));
-		p2.add(nedbør2);
-		p2.add(regData);
-		p2.add(utskrift2);
-*/		registrerdata = new RegistrerData();
+	
+		//Legger registrering av Data på tab nr to (p2)
+		registrerdata = new RegistrerData();
 		registrerdata.ByggPanel(p2);
 		
 		p8.add(utskrift4);
@@ -91,7 +74,7 @@ public class Tab extends JFrame implements ActionListener
 		//p4
 		JTabbedPane tpane = new JTabbedPane();
 
-		tpane.addTab("Registrer et nytt sted", null, p1, "hei");
+		tpane.addTab("Registrer et nytt sted", null, p1, "Trykk her for registrering av nytt sted");
 		tpane.addTab("Registrer ny data",null,p2, "Trykk her for registrering av ny data");
 		tpane.addTab("Vis data",null, p3, "hei");
 		tpane.addTab("Statistikk",p4);
