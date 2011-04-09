@@ -13,6 +13,7 @@ import javax.swing.*;
 
 import Meterologi.Lister.Data;
 import Meterologi.Lister.DataListe;
+import Meterologi.Lister.Sted;
 
 public class RegistrerData implements ActionListener{
 
@@ -38,9 +39,11 @@ public class RegistrerData implements ActionListener{
 		private double max;
 		private double ned;
 		
-		//lager pekere til dataliste og data
+		//lager pekere til dataliste og data, og valgt sted.
 		private DataListe dataliste;
 		private Data nydata;
+		private Sted valgtSted;
+		
 		//array over registrerte fylker og steder. samt pekere til valgt fylke og sted
 		private String fylke;
 		private final String[] fylker = {"Akershus", "Aust-Agder", "Buskerud Finnmark",
