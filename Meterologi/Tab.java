@@ -50,11 +50,7 @@ public class Tab extends JFrame implements ActionListener
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		JPanel p1 = new JPanel();
-		//JPanel p2 = new Panel();
-		registrerdata = new RegistrerData();
 		JPanel p2 = new JPanel();
-		registrerdata.ByggPanel(p2);
-
 		JPanel p3 = new JPanel();
 		JPanel p4 = new JPanel();
 		JPanel p5 = new JPanel();
@@ -92,7 +88,9 @@ public class Tab extends JFrame implements ActionListener
 		p2.add(nedbør2);
 		p2.add(regData);
 		p2.add(utskrift2);
-*/
+*/		registrerdata = new RegistrerData();
+		registrerdata.ByggPanel(p2);
+		
 		p8.add(utskrift4);
 		//p4
 		p4.add(new JLabel("hei du er på 4"));
@@ -149,10 +147,8 @@ public class Tab extends JFrame implements ActionListener
 
 			if(action.getSource() == RegNySted)
 				p1();
-			registrerdata.knappelytter(action);
 			/*else if(action.getSource() == regData)
 			{
-				
 				p2();
 			}*/
 		}
