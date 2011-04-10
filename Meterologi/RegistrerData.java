@@ -49,7 +49,7 @@ public class RegistrerData implements ActionListener{
 	
 	//array over registrerte fylker og steder. samt pekere til valgt fylke og sted
 	private String fylke;
-	private final String[] fylker = {"Akershus", "Aust-Agder", "Buskerud Finnmark",
+	private final String[] fylker = {"Akershus", "Aust-Agder", "Buskerud", "Finnmark",
 									"Hedmark","Hordaland","Møre og Romsdal",
 									"Nordland","Nord-Trøndelag","Oppland","Oslo","Rogaland",
 									"Sogn og Fjordane","Sør-Trøndelag","Telemark",
@@ -179,10 +179,13 @@ public class RegistrerData implements ActionListener{
 		}catch(Exception e){melding("ugyldig nedbørsverdi");return false;}
 		
 		if(ned < 0 )
-		{melding("ugyldig nedbørsverdier"); return false;}
-		if(min < -237)
+		{melding("ugyldig nedbørsverdi"); return false;}
+		if(ned > 229.6)
+		{melding("Ny nedbørsrekord");}
+		if(min < -273.15)
+		{melding("minimumstemperaturen som er innskrevet er mindre enn det absolutte nullpunkt!");return false;}
 		if(max < min)
-		{melding("maxnedbør er mindre en minnedbør!");return false;}
+		{melding("Innskrevet MaxTemp er mindre en MinTemp!");return false;}
 		if(max > 9999)
 		{melding("ekstremnedbør");}
 		
