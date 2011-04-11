@@ -2,7 +2,6 @@
  * Skrevet av Thomas Nordengen den 4 april 2011
  */
 
-package Meterologi.Lister;
 
 import javax.swing.*;
 import java.util.*;
@@ -13,7 +12,7 @@ public class StedListe
 	private SortedSet<Sted> stedsliste;
 	String rekkefølge = 
 		"Akershus, Aust-Agder, Buskerud Finnmark, Hedmark, Hordaland, Møre og Romsdal, " +
-		"Nordland, Nord-Trøndelag, Oppland, Oslo, Rogaland, Sogn og Fjordane, " +
+		"Nordland, Nord-Trøndelag, Oppland, Oslo, Rogaland, Sogn og Fjordane," +
 		"Sør-Trøndelag, Telemark, Troms, Vest-Agder, Vestfold, Østfold";
 	
 	
@@ -103,3 +102,5 @@ public class StedListe
 	}
 
 }
+
+//Tester git nå, i morra vil denne klassen bli gjort ferdig!
