@@ -21,6 +21,7 @@ public class Tab extends JFrame implements ActionListener
 	JButton regData;
 	StedListe stedliste; //må initialisere, men venter til stedliste er ferdig
 	RegistrerData registrerdata;
+	Statistikk statistikk;
 
 	public Tab()
 	{
@@ -47,16 +48,8 @@ public class Tab extends JFrame implements ActionListener
 		JPanel p2 = new JPanel();
 		JPanel p3 = new JPanel();
 		JPanel p4 = new JPanel();
-		JPanel p5 = new JPanel();
-		JPanel p6 = new JPanel();
-		JPanel p7 = new JPanel();
-		JPanel p8 = new JPanel();
-		
-		JTabbedPane sub = new JTabbedPane();
-		p3.add(sub);
 
-
-		//p1
+		//p1(første tab) Panel for registrering nytt sted, fylke
 		p1.add(new JLabel("Skriv inn fylket:"));
 		p1.add(innFylke);
 		p1.add(new JLabel("Skriv inn et nytt sted"));
@@ -64,35 +57,27 @@ public class Tab extends JFrame implements ActionListener
 		p1.add(RegNySted);
 		p1.add(utskrift1);
 	
-		//Legger registrering av Data på tab nr to (p2)
+		//Legger registrering av Data på tab nr.2 to (p2)
 		registrerdata = new RegistrerData();
 		registrerdata.ByggPanel(p2);
+
+		//p3 panel for Vis Data
+		p3.add(new JLabel("hei du er på vis data"));
 		
-		p8.add(utskrift4);
-		//p4
-		p4.add(new JLabel("hei du er på 4"));
-		//p4
+		//p4 panel for Statistikk
+		statistikk = new Statistikk();
+		statistikk.byggPanel(p4);
+		
+		//MAIN TABBED PANEL
 		JTabbedPane tpane = new JTabbedPane();
 
 		tpane.addTab("Registrer et nytt sted", null, p1, "Trykk her for registrering av nytt sted");
 		tpane.addTab("Registrer ny data",null,p2, "Trykk her for registrering av ny data");
 		tpane.addTab("Vis data",null, p3, "hei");
-		tpane.addTab("Statistikk",p4);
-		
-	
-		sub.addTab("Statistikk for år", p5);
-		sub.addTab("Statistikk for måned", p6);
-		sub.addTab("Statistikk for dag", p7);
-		sub.addTab("Ekstreme verdier", p8);
-		
+		tpane.addTab("Statistikk", null, p4, "Trykk her for å vise statistikkvalg");
 		
 		setLayout(new FlowLayout());
-		
-		
-		frame.setPreferredSize( new java.awt.Dimension(800,600) );
-		
-		
-		
+
 		frame.add(tpane);
 		frame.setSize(800,600);
 		frame.setLocationRelativeTo(null);
@@ -117,19 +102,10 @@ public class Tab extends JFrame implements ActionListener
 		melding("Nytt sted registrert");
 	}
 	
-	public void p2()
-	{
-		melding("Ny data er registrert i lista");
-	}
-	
 	public void actionPerformed(ActionEvent action) {
 
 			if(action.getSource() == RegNySted)
-				p1();
-			/*else if(action.getSource() == regData)
-			{
-				p2();
-			}*/
+				p1();	
 		}
 
 	public static void main(String[]args)
