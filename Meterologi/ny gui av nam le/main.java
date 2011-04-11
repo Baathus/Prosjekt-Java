@@ -1,9 +1,10 @@
+////////////////////////////////////////
 ///////Main-gui skrevet av Nam Le
 ////// tab1.java "Registrer et nytt sted"
 ////// tab2.java "Regsitrer ny data"
 ////// tab3.java "Vis Data"
 ////// tab4.java "Statistikk"
-
+////////////////////////////////////////
 
 import javax.swing.*;
 
