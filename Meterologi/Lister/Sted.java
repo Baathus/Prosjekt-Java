@@ -2,7 +2,6 @@
  * Skrevet av Mikael Jakhelln 8.april 2011
  */
 
-package Meterologi.Lister;
 
 import java.io.Serializable;
 
@@ -54,6 +53,6 @@ public class Sted implements Serializable{
 	
 	public String toString()
 	{
-		return fylke;
+		return fylke + ", " + sted;
 	}
 }
