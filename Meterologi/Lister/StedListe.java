@@ -4,91 +4,70 @@
 
 
 import javax.swing.*;
+
+import java.text.*;
 import java.util.*;
 import java.io.*;
 
 public class StedListe
+
 {
-	private SortedSet<Sted> stedsliste;
-	String rekkefølge = 
-		"Akershus, Aust-Agder, Buskerud Finnmark, Hedmark, Hordaland, Møre og Romsdal, " +
-		"Nordland, Nord-Trøndelag, Oppland, Oslo, Rogaland, Sogn og Fjordane," +
-		"Sør-Trøndelag, Telemark, Troms, Vest-Agder, Vestfold, Østfold";
+	private RuleBasedCollator kollator;
+	private SortedSet<Sted> stedliste = new TreeSet<Sted>();
 	
-	
-	
-	try{
-		Comparator comp = new RuleBasedComparator (rekkefølge);
-	}
-	catch(ParseException pe)
-	{
-		JOptionPane.showMessageDialog(null, "Det oppstod en feil i sorteringen!");
-
-	}
-
-
-
-	public String getFylke(Sted obj)
-	{
-		String fylke = "";
-		fylke = Sted.getFylke();
-		return fylke;
-	}
-
-	//Setter inn fylke i listen
+	//Setter inn sted bakerst i listen
 	public void setInnFylke(Sted obj)
 	{
-		stedsliste.add(obj);
+		stedliste.add(obj);
 	}
+	
 
-	//Gjennomløper lista fra valgt startposisjon og fremmover
-	public String visFraStartPos(String fylke)
+	/*public String getFylke(Sted obj)
 	{
-		SortedSet<Sted> tail = stedsliste.tailset(fylke);
-		Iterator<S ted> iter = new tale.iterator();
-		while(iter.hasNext())
+		String fylke = "";
+		fylke = Sted.toString();
+		return fylke;
+	}*/
+	
+	//Gjennomløper og skriver ut lista
+	public String skrivUt()
+	{
+		String output = "";
+		Iterator<Sted> iterator = stedliste.iterator();
+		while(iterator.hasNext())
 		{
-			String resultat = iter.next();
+			output += iterator.next().toString() + "\n";
 		}
-		return resultat;
+		
+		return output;
 	}
-
-
-
-
-	public String sorterObjekter()
+	
+	//Gjennomløper og skriver ut lista alfabetisk
+	public String skrivUtAlfabetisk()
 	{
-		String sorted = "";
-
-		stedsliste = new TreeSet<Sted>(comp);
-		Iterator<Sted> iter = new stedsliste.iterator();
-
-		while(iter.hasNext())
+		//Definerer rekkefølgen på sorteringen
+		String rekkefølge = 
+			"Akershus, Aust-Agder, Buskerud Finnmark, Hedmark, Hordaland, Møre og Romsdal, " +
+			"Nordland, Nord-Trøndelag, Oppland, Oslo, Rogaland, Sogn og Fjordane," +
+			"Sør-Trøndelag, Telemark, Troms, Vest-Agder, Vestfold, Østfold";
+		try
 		{
-			sorted += iterator.next().toString() + "\n";
+			kollator = new RuleBasedCollator (rekkefølge);
 		}
-
-		return sorted;
-	}
-
-	//Alfabetisk utskrift av alle flylker med respektive steder
-	public String getFylkeSted()
-	{
-		String sorted2 = "";
-
-				stedsliste = new TreeSet<Sted>(comp);
-				Iterator<Sted> iter = new stedsliste.iterator();
-				String plass = "";
-
-				while(iter.hasNext())
-				{
-					sted = iter.next().getSted();
-
-					sorted2 += iterator.next().toString() + "\n";
-					sorted2 += sted"\n";
-				}
-
-		return sorted;
+		catch(ParseException pe)
+		{
+			JOptionPane.showMessageDialog(null, "Det oppstod en feil i sorteringen!");
+		}
+		
+		stedliste = new TreeSet<Sted>(kollator);
+		
+		Iterator<Sted> Iter =  stedliste.iterator();
+		while(Iter.hasNext())
+		{
+			Iter.next();
+		}
+		String output = stedliste.toString();
+		return output;
 	}
 
 
@@ -96,11 +75,11 @@ public class StedListe
 	{
 		String result = "";
 
-		result += "Dette er den totale og sorterte listen av alle fylkene." + sorted + "\n";
+		result += "Dette er den totale og sorterte listen av alle fylkene." + skrivUtAlfabetisk() + "\n";
 
 		return result;
 	}
 
 }
 
-//Tester git nå, i morra vil denne klassen bli gjort ferdig!
+
