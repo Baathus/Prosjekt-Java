@@ -2,104 +2,101 @@
  * Skrevet av Thomas Nordengen den 4 april 2011
  */
 
-package Meterologi.Lister;
 
 import javax.swing.*;
+import java.io.*; //For senere serializable
+import java.text.*;
 import java.util.*;
-import java.io.*;
 
 public class StedListe
 {
-	private SortedSet<Sted> stedsliste;
-	String rekkefølge = 
-		"Akershus, Aust-Agder, Buskerud Finnmark, Hedmark, Hordaland, Møre og Romsdal, " +
-		"Nordland, Nord-Trøndelag, Oppland, Oslo, Rogaland, Sogn og Fjordane, " +
-		"Sør-Trøndelag, Telemark, Troms, Vest-Agder, Vestfold, Østfold";
+	private List<Sted> stedliste = new LinkedList<Sted>();
 	
-	
-	
-	try{
-		Comparator comp = new RuleBasedComparator (rekkefølge);
-	}
-	catch(ParseException pe)
-	{
-		JOptionPane.showMessageDialog(null, "Det oppstod en feil i sorteringen!");
-
-	}
-
-
-
-	public String getFylke(Sted obj)
-	{
-		String fylke = "";
-		fylke = Sted.getFylke();
-		return fylke;
-	}
-
-	//Setter inn fylke i listen
+	//Setter inn sted bakerst i listen
 	public void setInnFylke(Sted obj)
 	{
-		stedsliste.add(obj);
+		stedliste.add(obj);
 	}
-
-	//Gjennomløper lista fra valgt startposisjon og fremmover
-	public String visFraStartPos(String fylke)
+	
+	//Sorterer Sted-Lista alfabetisk basert på Fylke
+	public void sorter()
 	{
-		SortedSet<Sted> tail = stedsliste.tailset(fylke);
-		Iterator<S ted> iter = new tale.iterator();
-		while(iter.hasNext())
+		Collections.sort(stedliste, new Stedsammenlikner());
+	}
+	
+	//Gjennomløper og skriver ut lista
+	public String skrivUt()
+	{
+		sorter();
+		String output = "";
+		Iterator<Sted> iterator = stedliste.iterator();
+		while(iterator.hasNext())
 		{
-			String resultat = iter.next();
+			output += iterator.next().toString() + "\n";
 		}
-		return resultat;
+		
+		return output;
 	}
-
-
-
-
-	public String sorterObjekter()
+	
+	public boolean tomListe()
 	{
-		String sorted = "";
-
-		stedsliste = new TreeSet<Sted>(comp);
-		Iterator<Sted> iter = new stedsliste.iterator();
-
-		while(iter.hasNext())
-		{
-			sorted += iterator.next().toString() + "\n";
-		}
-
-		return sorted;
+		Iterator<Sted> iter = stedliste.iterator();
+		if(!iter.hasNext())
+			return true;
+		else 
+			return false;
 	}
-
-	//Alfabetisk utskrift av alle flylker med respektive steder
-	public String getFylkeSted()
-	{
-		String sorted2 = "";
-
-				stedsliste = new TreeSet<Sted>(comp);
-				Iterator<Sted> iter = new stedsliste.iterator();
-				String plass = "";
-
-				while(iter.hasNext())
-				{
-					sted = iter.next().getSted();
-
-					sorted2 += iterator.next().toString() + "\n";
-					sorted2 += sted"\n";
-				}
-
-		return sorted;
-	}
-
 
 	public String toString()
 	{
 		String result = "";
 
-		result += "Dette er den totale og sorterte listen av alle fylkene." + sorted + "\n";
+		result += "Dette er den totale og sorterte listen av alle stedene." + skrivUt() + "\n";
 
 		return result;
 	}
-
 }
+
+class Stedsammenlikner implements Comparator<Sted>
+{
+	//Gjennomløper og skriver ut lista alfabetisk
+	
+		//Definerer rekkefølgen på sorteringen
+		String rekkefølge = 
+			"<\0<0<1<2<3<4<5<6<7<8<9" +
+            "<A,a<B,b<C,c<D,d<E,e<F,f<G,g<H,h<I,i<J,j" +
+           "<K,k<L,l<M,m<N,n<O,o<P,p<Q,q<R,r<S,s<T,t" +
+           "<U,u<V,v<W,w<X,x<Y,y<Z,z<Æ,æ<Ø,ø<Å=AA,å=aa;AA,aa";
+		
+		private RuleBasedCollator kollator;
+		public Stedsammenlikner()
+		{
+			try
+			{
+				kollator = new RuleBasedCollator (rekkefølge);
+			}
+			catch(ParseException pe)
+			{
+				JOptionPane.showMessageDialog(null, "Det oppstod en feil i sorteringen!");
+				System.exit(0);
+			}
+		}
+		
+		public int compare(Sted p1, Sted p2)
+		{
+			String nr1 = p1.getFylke();
+			String nr2 = p2.getFylke();
+			String f1 = p1.getSted();
+			String f2 = p2.getSted();
+			int d = kollator.compare(nr1, nr2);
+			if( d != 0)
+				return d;
+			else
+				return kollator.compare(f1,f2);
+		}
+}
+
+
+
+
+

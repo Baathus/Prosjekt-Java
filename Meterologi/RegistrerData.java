@@ -1,7 +1,13 @@
 /*
+<<<<<<< HEAD
  * Skrevet av Mikael Jakhelln,
  * Oppdatert: 9.4.2011
  * Denne klassen skal bygge gui, samt metoder og lytter for registrering av nyData
+=======
+ * Skrevet av Mikael Jakhelln, 
+ * Oppdatert: 11.4.2011
+ * Denne klassen skal bygge gui, samt metoder og lytter for registrering av nyData 
+>>>>>>> e0bce05727c55eb72913c148c6aa886cb224b05b
  * og legges til i Tab.java
  */
 
@@ -24,8 +30,8 @@ public class RegistrerData implements ActionListener{
 
 	private JComboBox fylkeboks;
 	private JComboBox stedboks;
-	private JTextField dagfelt;
-	private JTextField månedfelt;
+	private JComboBox dagboks;
+	private JComboBox månedboks;
 	private JTextField årfelt;
 	private JTextField mintempfelt;
 	private JTextField maxtempfelt;
@@ -49,13 +55,17 @@ public class RegistrerData implements ActionListener{
 
 	//array over registrerte fylker og steder. samt pekere til valgt fylke og sted
 	private String fylke;
-	private final String[] fylker = {"Akershus", "Aust-Agder", "Buskerud Finnmark",
+	private final String[] fylker = {"Akershus", "Aust-Agder", "Buskerud", "Finnmark",
 									"Hedmark","Hordaland","Møre og Romsdal",
 									"Nordland","Nord-Trøndelag","Oppland","Oslo","Rogaland",
 									"Sogn og Fjordane","Sør-Trøndelag","Telemark",
 									"Troms","Vest-Agder","Vestfold","Østfold"};
 	private String sted;
 	private final String[] steder = {"Sted 1","Sted 2","Sted 3"};
+	private final String[] dager = {"1","2","3","4","5","6","7","8","9","10",
+									"11","12","13","14","15","16","17","18","19",
+									"20","21","22","23","24","25","26","27","28","29","30","31"};
+	private final String[] måneder= {"1","2","3","4","5","6","7","8","9","10","11","12"};
 	//skal egentlig bruke stedsliste.getRegistrerteSteder() og stedsliste.getRegistrerteFylker()
 	//som skal returnere en String[] med registrerte fylker, og en annen med steder
 
@@ -83,11 +93,16 @@ public class RegistrerData implements ActionListener{
 		årfelt = new JTextField(4);
 		datopanel.add(årfelt);
 		datopanel.add(new JLabel("Måned"));
-		månedfelt = new JTextField(2);
-		datopanel.add(månedfelt);
+		månedboks = new JComboBox(måneder);
+		datopanel.add(månedboks);
 		datopanel.add(new JLabel("Dag"));
+<<<<<<< HEAD
 		dagfelt = new JTextField(2);
 		datopanel.add(dagfelt);
+=======
+		dagboks = new JComboBox(dager);
+		datopanel.add(dagboks);				
+>>>>>>> e0bce05727c55eb72913c148c6aa886cb224b05b
 		toppanel.add(datopanel);
 		//inputfelter for inndata
 		JPanel inndatapanel = new JPanel();
@@ -120,8 +135,13 @@ public class RegistrerData implements ActionListener{
 
 		//Initialiserer listen med steder og data  (forøvring bare datalisten)
 		dataliste = new DataListe();
+<<<<<<< HEAD
 	}
 
+=======
+	}//end of byggPanel()
+	
+>>>>>>> e0bce05727c55eb72913c148c6aa886cb224b05b
 	public void melding(String m)
 	{
 		JOptionPane.showMessageDialog(null,m, "OBS!", JOptionPane.INFORMATION_MESSAGE);
@@ -139,8 +159,8 @@ public class RegistrerData implements ActionListener{
 
 	public boolean getDatoVerdier()
 	{
-		dag = Integer.parseInt(dagfelt.getText());
-		måned = Integer.parseInt(månedfelt.getText());
+		dag = Integer.parseInt((String) dagboks.getSelectedItem());
+		måned =Integer.parseInt((String) månedboks.getSelectedItem());
 		år = Integer.parseInt(årfelt.getText());
 		if(dag <= 0 || dag > 31)
 		{	melding("ugyldig dag");
@@ -160,8 +180,13 @@ public class RegistrerData implements ActionListener{
 		}
 		//må lage test på registrering av datoer som ikke har vært ennå.
 		return true;
+<<<<<<< HEAD
 	}
 
+=======
+	}//end of getDatoVerdier()
+	
+>>>>>>> e0bce05727c55eb72913c148c6aa886cb224b05b
 	public boolean getVærVerdier()
 	{
 		try{
@@ -173,16 +198,28 @@ public class RegistrerData implements ActionListener{
 		try{
 		ned = Integer.parseInt(nedbørfelt.getText());
 		}catch(Exception e){melding("ugyldig nedbørsverdi");return false;}
+<<<<<<< HEAD
 
 		if(min <0 )
 		{melding("ugyldig nedbørsverdier"); return false;}
 		if(max<min)
 		{melding("maxnedbør er mindre en minnedbør!");return false;}
+=======
+		
+		if(ned < 0 )
+		{melding("ugyldig nedbørsverdi"); return false;}
+		if(ned > 229.6)
+		{melding("Ny nedbørsrekord");}
+		if(min < -273.15)
+		{melding("minimumstemperaturen som er innskrevet er mindre enn det absolutte nullpunkt!");return false;}
+		if(max < min)
+		{melding("Innskrevet MaxTemp er mindre en MinTemp!");return false;}
+>>>>>>> e0bce05727c55eb72913c148c6aa886cb224b05b
 		if(max > 9999)
 		{melding("ekstremnedbør");}
 
 		return true;
-	}
+	}//end of getVærVerdier()
 
 	public void actionPerformed(ActionEvent event) {
 		if(event.getSource() == skrivut)
@@ -203,7 +240,7 @@ public class RegistrerData implements ActionListener{
 				//lagrer dato som calendar objekt
 				Calendar dato = Calendar.getInstance();
 				dato.setTimeInMillis(0); //hadde vært lettere med Date(år, måned, dato)
-				dato.set(år,måned-1,dag);/*-1 fordi Calendar.set() er teit*/
+				dato.set(år,måned-1,dag);/*måned-1 fordi Calendar.set() er teit*/
 				Calendar nå = Calendar.getInstance();
 				if(nå.before(dato))
 				{
@@ -229,5 +266,5 @@ public class RegistrerData implements ActionListener{
 			}
 			catch(Exception ex){melding("Feil ved innsetting av data!");};
 		}
-	}
+	}//end of actionPerformed()
 }//End of registrerData

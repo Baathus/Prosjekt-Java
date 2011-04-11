@@ -19,10 +19,16 @@ public class Tab extends JFrame implements ActionListener
 	JButton RegNySted;
 	JTextField innFylke,innSted;
 	JButton regData;
+<<<<<<< HEAD
 	tab1 t = new tab1();
 
 	//StedListe stedliste; //må initialisere, men venter til stedliste er ferdig
 	//RegistrerData registrerdata;
+=======
+	StedListe stedliste; //må initialisere, men venter til stedliste er ferdig
+	RegistrerData registrerdata;
+	Statistikk statistikk;
+>>>>>>> e0bce05727c55eb72913c148c6aa886cb224b05b
 
 	public Tab()
 	{
@@ -49,6 +55,7 @@ public class Tab extends JFrame implements ActionListener
 		JPanel p2 = new JPanel();
 		JPanel p3 = t.tab1();
 		JPanel p4 = new JPanel();
+<<<<<<< HEAD
 		JPanel p5 = new JPanel();
 		JPanel p6 = new JPanel();
 		JPanel p7 = new JPanel();
@@ -58,14 +65,17 @@ public class Tab extends JFrame implements ActionListener
 		JTabbedPane sub = new JTabbedPane();
 		p3.add(sub);
 
+=======
+>>>>>>> e0bce05727c55eb72913c148c6aa886cb224b05b
 
-		//p1
+		//p1(første tab) Panel for registrering nytt sted, fylke
 		p1.add(new JLabel("Skriv inn fylket:"));
 		p1.add(innFylke);
 		p1.add(new JLabel("Skriv inn et nytt sted"));
 		p1.add(innSted);
 		p1.add(RegNySted);
 		p1.add(utskrift1);
+<<<<<<< HEAD
 
 
 
@@ -92,11 +102,27 @@ public class Tab extends JFrame implements ActionListener
 		//p4
 		p4.add(new JLabel("hei du er på 4"));
 		//p4
+=======
+	
+		//Legger registrering av Data på tab nr.2 to (p2)
+		registrerdata = new RegistrerData();
+		registrerdata.ByggPanel(p2);
+
+		//p3 panel for Vis Data
+		p3.add(new JLabel("hei du er på vis data"));
+		
+		//p4 panel for Statistikk
+		statistikk = new Statistikk();
+		statistikk.byggPanel(p4);
+		
+		//MAIN TABBED PANEL
+>>>>>>> e0bce05727c55eb72913c148c6aa886cb224b05b
 		JTabbedPane tpane = new JTabbedPane();
 
-		tpane.addTab("Registrer et nytt sted", null, p1, "hei");
+		tpane.addTab("Registrer et nytt sted", null, p1, "Trykk her for registrering av nytt sted");
 		tpane.addTab("Registrer ny data",null,p2, "Trykk her for registrering av ny data");
 		tpane.addTab("Vis data",null, p3, "hei");
+<<<<<<< HEAD
 		tpane.addTab("Statistikk",p4);
 
 
@@ -113,6 +139,12 @@ public class Tab extends JFrame implements ActionListener
 
 
 
+=======
+		tpane.addTab("Statistikk", null, p4, "Trykk her for å vise statistikkvalg");
+		
+		setLayout(new FlowLayout());
+
+>>>>>>> e0bce05727c55eb72913c148c6aa886cb224b05b
 		frame.add(tpane);
 		frame.setSize(800,600);
 		frame.setLocationRelativeTo(null);
@@ -136,20 +168,20 @@ public class Tab extends JFrame implements ActionListener
 	{
 		melding("Nytt sted registrert");
 	}
+<<<<<<< HEAD
 
 	public void p2()
 	{
 		melding("Ny data er registrert i lista");
 	}
 
+=======
+	
+>>>>>>> e0bce05727c55eb72913c148c6aa886cb224b05b
 	public void actionPerformed(ActionEvent action) {
 
 			if(action.getSource() == RegNySted)
-				p1();
-			/*else if(action.getSource() == regData)
-			{
-				p2();
-			}*/
+				p1();	
 		}
 
 	public static void main(String[]args)
