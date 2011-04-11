@@ -1,14 +1,14 @@
 /*
- * Skrevet hovedsaklig av Nam le(mest kred!), 
+ * Skrevet hovedsaklig av Nam le(mest kred!),
  * med småsnutt fra Mikael Jakhelln og eventuelt Thomas Nordengen
  * Oppdatert: 9.April 2011
  */
 
-package Meterologi;
+
 
 import javax.swing.*;
 
-import Meterologi.Lister.StedListe;
+//import Meterologi.Lister.StedListe;
 
 import java.awt.event.*;
 import java.awt.*;
@@ -19,8 +19,10 @@ public class Tab extends JFrame implements ActionListener
 	JButton RegNySted;
 	JTextField innFylke,innSted;
 	JButton regData;
-	StedListe stedliste; //må initialisere, men venter til stedliste er ferdig
-	RegistrerData registrerdata;
+	tab1 t = new tab1();
+
+	//StedListe stedliste; //må initialisere, men venter til stedliste er ferdig
+	//RegistrerData registrerdata;
 
 	public Tab()
 	{
@@ -45,13 +47,14 @@ public class Tab extends JFrame implements ActionListener
 
 		JPanel p1 = new JPanel();
 		JPanel p2 = new JPanel();
-		JPanel p3 = new JPanel();
+		JPanel p3 = t.tab1();
 		JPanel p4 = new JPanel();
 		JPanel p5 = new JPanel();
 		JPanel p6 = new JPanel();
 		JPanel p7 = new JPanel();
 		JPanel p8 = new JPanel();
-		
+
+
 		JTabbedPane sub = new JTabbedPane();
 		p3.add(sub);
 
@@ -63,9 +66,9 @@ public class Tab extends JFrame implements ActionListener
 		p1.add(innSted);
 		p1.add(RegNySted);
 		p1.add(utskrift1);
-		
-		
-		
+
+
+
 /* Mikael tester å lage eget panel :/
 		//p2
 		p2.add(new JLabel("Skriv fylke :"));
@@ -82,9 +85,9 @@ public class Tab extends JFrame implements ActionListener
 		p2.add(nedbør2);
 		p2.add(regData);
 		p2.add(utskrift2);
-*/		registrerdata = new RegistrerData();
-		registrerdata.ByggPanel(p2);
-		
+*/	//	registrerdata = new RegistrerData();
+	//	registrerdata.ByggPanel(p2);
+
 		p8.add(utskrift4);
 		//p4
 		p4.add(new JLabel("hei du er på 4"));
@@ -95,21 +98,21 @@ public class Tab extends JFrame implements ActionListener
 		tpane.addTab("Registrer ny data",null,p2, "Trykk her for registrering av ny data");
 		tpane.addTab("Vis data",null, p3, "hei");
 		tpane.addTab("Statistikk",p4);
-		
-	
+
+
 		sub.addTab("Statistikk for år", p5);
 		sub.addTab("Statistikk for måned", p6);
 		sub.addTab("Statistikk for dag", p7);
 		sub.addTab("Ekstreme verdier", p8);
-		
-		
+
+
 		setLayout(new FlowLayout());
-		
-		
+
+
 		frame.setPreferredSize( new java.awt.Dimension(800,600) );
-		
-		
-		
+
+
+
 		frame.add(tpane);
 		frame.setSize(800,600);
 		frame.setLocationRelativeTo(null);
@@ -123,22 +126,22 @@ public class Tab extends JFrame implements ActionListener
 
 
 	} //slutt på Konstruktør
-	
+
 	public void melding(String m)
 	{
 		JOptionPane.showMessageDialog(null,m, "OBS!", JOptionPane.INFORMATION_MESSAGE);
 	}
-	
+
 	public void p1()
 	{
 		melding("Nytt sted registrert");
 	}
-	
+
 	public void p2()
 	{
 		melding("Ny data er registrert i lista");
 	}
-	
+
 	public void actionPerformed(ActionEvent action) {
 
 			if(action.getSource() == RegNySted)

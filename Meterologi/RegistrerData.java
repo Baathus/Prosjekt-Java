@@ -1,7 +1,7 @@
 /*
- * Skrevet av Mikael Jakhelln, 
+ * Skrevet av Mikael Jakhelln,
  * Oppdatert: 9.4.2011
- * Denne klassen skal bygge gui, samt metoder og lytter for registrering av nyData 
+ * Denne klassen skal bygge gui, samt metoder og lytter for registrering av nyData
  * og legges til i Tab.java
  */
 
@@ -21,7 +21,7 @@ public class RegistrerData implements ActionListener{
 	private static final long serialVersionUID = 1L;
 
 	private JTextArea utskrift;
-	
+
 	private JComboBox fylkeboks;
 	private JComboBox stedboks;
 	private JTextField dagfelt;
@@ -32,21 +32,21 @@ public class RegistrerData implements ActionListener{
 	private JTextField nedbørfelt;
 	private JButton skrivut;
 	private JButton leggtilny;
-	
+
 	private int dag;
 	private int måned;
 	private int år;
 	private double min;
 	private double max;
 	private double ned;
-	
+
 	//lager pekere til dataliste og data, og valgt sted.
 	private DataListe dataliste;
 	private Data nydata;
-	private Sted valgtSted; 
+	private Sted valgtSted;
 	//valgtSted skal peke på stedet man velger i comboboksene.
 	//det er dette stedet man skal lagre ny data på sted.nyData.(Data d);
-	
+
 	//array over registrerte fylker og steder. samt pekere til valgt fylke og sted
 	private String fylke;
 	private final String[] fylker = {"Akershus", "Aust-Agder", "Buskerud Finnmark",
@@ -62,7 +62,7 @@ public class RegistrerData implements ActionListener{
 	public void ByggPanel(JPanel panelet)
 	{	//bygger GUI på parameter panelet
 		panelet.setLayout(new FlowLayout());
-		
+
 		//panel for alt utenom utksiftsfelt
 		JPanel toppanel = new JPanel();
 		toppanel.setLayout(new GridLayout(4,0));
@@ -87,7 +87,7 @@ public class RegistrerData implements ActionListener{
 		datopanel.add(månedfelt);
 		datopanel.add(new JLabel("Dag"));
 		dagfelt = new JTextField(2);
-		datopanel.add(dagfelt);				
+		datopanel.add(dagfelt);
 		toppanel.add(datopanel);
 		//inputfelter for inndata
 		JPanel inndatapanel = new JPanel();
@@ -112,21 +112,21 @@ public class RegistrerData implements ActionListener{
 		toppanel.add(knappepanel);
 		//legger til toppanelet
 		panelet.add(toppanel);
-		
+
 		//utskriftsvindu
 		utskrift = new JTextArea(20, 50);
 		panelet.add(new JScrollPane(utskrift));
 		panelet.setVisible(true);
-		
+
 		//Initialiserer listen med steder og data  (forøvring bare datalisten)
 		dataliste = new DataListe();
 	}
-	
+
 	public void melding(String m)
 	{
 		JOptionPane.showMessageDialog(null,m, "OBS!", JOptionPane.INFORMATION_MESSAGE);
 	}
-	
+
 	public boolean getStedVerdier()
 	{
 		try{
@@ -136,7 +136,7 @@ public class RegistrerData implements ActionListener{
 		{melding("det oppstod en feil med valg av fylke og sted");return false;}
 		return true;
 	}
-	
+
 	public boolean getDatoVerdier()
 	{
 		dag = Integer.parseInt(dagfelt.getText());
@@ -144,7 +144,7 @@ public class RegistrerData implements ActionListener{
 		år = Integer.parseInt(årfelt.getText());
 		if(dag <= 0 || dag > 31)
 		{	melding("ugyldig dag");
-			return false; 
+			return false;
 		}
 		if(måned == 0 || måned >12 || måned < 1)
 		{	melding("ugyldig måned");
@@ -161,7 +161,7 @@ public class RegistrerData implements ActionListener{
 		//må lage test på registrering av datoer som ikke har vært ennå.
 		return true;
 	}
-	
+
 	public boolean getVærVerdier()
 	{
 		try{
@@ -173,14 +173,14 @@ public class RegistrerData implements ActionListener{
 		try{
 		ned = Integer.parseInt(nedbørfelt.getText());
 		}catch(Exception e){melding("ugyldig nedbørsverdi");return false;}
-		
+
 		if(min <0 )
 		{melding("ugyldig nedbørsverdier"); return false;}
 		if(max<min)
 		{melding("maxnedbør er mindre en minnedbør!");return false;}
 		if(max > 9999)
 		{melding("ekstremnedbør");}
-		
+
 		return true;
 	}
 
@@ -193,7 +193,7 @@ public class RegistrerData implements ActionListener{
 				utskrift.setText(dataliste.skrivUtListe() );
 		}
 		if(event.getSource() == leggtilny)
-		{	
+		{
 			try{
 				if(!getStedVerdier())//henter valg fra sted og fylkesinput, returnerer false ved feil
 					return;
@@ -201,7 +201,7 @@ public class RegistrerData implements ActionListener{
 				if(!getDatoVerdier())
 					return;
 				//lagrer dato som calendar objekt
-				Calendar dato = Calendar.getInstance(); 
+				Calendar dato = Calendar.getInstance();
 				dato.setTimeInMillis(0); //hadde vært lettere med Date(år, måned, dato)
 				dato.set(år,måned-1,dag);/*-1 fordi Calendar.set() er teit*/
 				Calendar nå = Calendar.getInstance();
@@ -210,16 +210,16 @@ public class RegistrerData implements ActionListener{
 					melding("innskrevet dato har ikke intruffet ennå");
 					return;
 				}
-				
+
 				if(!getVærVerdier())
 					return;
-				
+
 				//lager en ny node med dataen
 				nydata = new Data(dato, min, max, ned);
-				
+
 				//prøver å sette den inn i lista.
 				boolean dobbeltregistrering = dataliste.datoEksisterer(nydata);
-					
+
 				if(dobbeltregistrering)
 				{melding("Det er allerede registrert data på denne datoen");}
 				else{
