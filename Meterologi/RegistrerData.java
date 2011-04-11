@@ -124,7 +124,7 @@ public class RegistrerData implements ActionListener{
 		
 		//Initialiserer listen med steder og data  (forøvring bare datalisten)
 		dataliste = new DataListe();
-	}
+	}//end of byggPanel()
 	
 	public void melding(String m)
 	{
@@ -164,7 +164,7 @@ public class RegistrerData implements ActionListener{
 		}
 		//må lage test på registrering av datoer som ikke har vært ennå.
 		return true;
-	}
+	}//end of getDatoVerdier()
 	
 	public boolean getVærVerdier()
 	{
@@ -190,7 +190,7 @@ public class RegistrerData implements ActionListener{
 		{melding("ekstremnedbør");}
 		
 		return true;
-	}
+	}//end of getVærVerdier()
 
 	public void actionPerformed(ActionEvent event) {
 		if(event.getSource() == skrivut)
@@ -237,5 +237,5 @@ public class RegistrerData implements ActionListener{
 			}
 			catch(Exception ex){melding("Feil ved innsetting av data!");};
 		}
-	}
+	}//end of actionPerformed()
 }//End of registrerData

@@ -48,17 +48,8 @@ public class Tab extends JFrame implements ActionListener
 		JPanel p2 = new JPanel();
 		JPanel p3 = new JPanel();
 		JPanel p4 = new JPanel();
-		/*mekker en egen klasse for statistikk
-		JPanel p5 = new JPanel();
-		JPanel p6 = new JPanel();
-		JPanel p7 = new JPanel();
-		JPanel p8 = new JPanel();
-		sub = new JTabbedPane();
-		p4.add(sub);
-		*/
 
-
-		//p1
+		//p1(første tab) Panel for registrering nytt sted, fylke
 		p1.add(new JLabel("Skriv inn fylket:"));
 		p1.add(innFylke);
 		p1.add(new JLabel("Skriv inn et nytt sted"));
@@ -70,10 +61,10 @@ public class Tab extends JFrame implements ActionListener
 		registrerdata = new RegistrerData();
 		registrerdata.ByggPanel(p2);
 
-		//p3 Vis Data
+		//p3 panel for Vis Data
 		p3.add(new JLabel("hei du er på vis data"));
 		
-		//p4 Statistikk
+		//p4 panel for Statistikk
 		statistikk = new Statistikk();
 		statistikk.byggPanel(p4);
 		
@@ -85,20 +76,8 @@ public class Tab extends JFrame implements ActionListener
 		tpane.addTab("Vis data",null, p3, "hei");
 		tpane.addTab("Statistikk", null, p4, "Trykk her for å vise statistikkvalg");
 		
-	/* mekker en egen klasse for statistikk
-		sub.addTab("Statistikk for år", p5);
-		sub.addTab("Statistikk for måned", p6);
-		sub.addTab("Statistikk for dag", p7);
-		sub.addTab("Ekstreme verdier", p8);
-	*/
-		
 		setLayout(new FlowLayout());
-		
-		
-		//frame.setPreferredSize( new java.awt.Dimension(800,600) );
-		
-		
-		
+
 		frame.add(tpane);
 		frame.setSize(800,600);
 		frame.setLocationRelativeTo(null);
